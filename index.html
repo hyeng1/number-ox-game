@@ -1,8 +1,29 @@
 <script>
-let t=Math.floor(Math.random() * 100) + 1;
+let name = prompt("이름 입력");
+let t = Math.floor(Math.random() * 100) + 1;
+let count = 0;
+
 while(1){
- let g=prompt("num?");
- if(g==t){alert("OK");break;}
- alert(g<t?"UP":"DN");
+ let g = prompt("1~100 숫자");
+ count++;
+
+ if(g == t){
+   alert("정답! " + count + "번");
+
+   // 기존 최고 기록 가져오기
+   let best = localStorage.getItem("bestCount");
+
+   if(!best || count < best){
+     localStorage.setItem("bestCount", count);
+     localStorage.setItem("bestName", name);
+     alert("🏆 신기록!");
+   } else {
+     alert("현재 1등: " + localStorage.getItem("bestName") + " (" + best + "번)");
+   }
+
+   break;
+ }
+
+ alert(g < t ? "UP" : "DN");
 }
 </script>
